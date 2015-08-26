@@ -35,7 +35,7 @@ object HmrcBuild extends Build {
     Test.pegdown
   )
 
-  lazy val jsonEncryption = (project in file("."))
+  lazy val jsonEncryption = Project(nameApp, file("."))
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
       targetJvm := "jvm-1.7",
