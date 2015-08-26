@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/hmrc/json-encryption.svg)](https://travis-ci.org/hmrc/json-encryption) [ ![Download](https://api.bintray.com/packages/hmrc/releases/json-encryption/images/download.svg) ](https://bintray.com/hmrc/releases/json-encryption/_latestVersion)
 
 
-A library that provides JSON encryption
+A library that provides JSON encryption.
 
 ##Setup
 
