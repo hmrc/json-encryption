@@ -9,7 +9,7 @@ A library that provides JSON encryption.
 
 ##Setup
 
-Add the jar to the projects dependencies:
+Add the jar to the project dependencies:
 
 ```
     "uk.gov.hmrc" %% "json-encryption" % "[INSERT VERSION]"
