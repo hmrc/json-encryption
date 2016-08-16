@@ -54,7 +54,7 @@ object Dependencies {
   object Compile {
     val playJson = "com.typesafe.play" %% "play-json" % "2.3.9" % "provided"
     val secure = "uk.gov.hmrc" %% "secure" % "7.0.0"
-    val crypto = "uk.gov.hmrc" %% "crypto" % "3.0.0"
+    val crypto = "uk.gov.hmrc" %% "crypto" % "3.1.0"
   }
 
   sealed abstract class Test(scope: String) {
