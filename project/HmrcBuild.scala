@@ -52,7 +52,7 @@ object HmrcBuild extends Build {
 object Dependencies {
 
   object Compile {
-    val playJson = "com.typesafe.play" %% "play-json" % "2.3.9" % "provided"
+    val playJson = "com.typesafe.play" %% "play-json" % "2.5.8" % "provided"
     val secure = "uk.gov.hmrc" %% "secure" % "7.0.0"
     val crypto = "uk.gov.hmrc" %% "crypto" % "3.1.0"
   }

@@ -32,10 +32,10 @@ class JsonEncryptionSpec extends WordSpec with Matchers {
 
       val json = Json.toJson(e)(TestEntity.formats)
 
-      json \ "normalString" shouldBe JsString("unencrypted")
-      json \ "encryptedString" shouldBe JsString("3TW3L1raxsKBYuKvtKqPEQ==")
-      json \ "encryptedBoolean" shouldBe JsString("YhWm43Ad3rW5Votdy855Kg==")
-      json \ "encryptedNumber" shouldBe JsString("Z/ipDOvm7C3ck/TBkiteAg==")
+      (json \ "normalString").get shouldBe JsString("unencrypted")
+      (json \ "encryptedString").get shouldBe JsString("3TW3L1raxsKBYuKvtKqPEQ==")
+      (json \ "encryptedBoolean").get shouldBe JsString("YhWm43Ad3rW5Votdy855Kg==")
+      (json \ "encryptedNumber").get shouldBe JsString("Z/ipDOvm7C3ck/TBkiteAg==")
 
     }
 
