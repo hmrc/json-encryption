@@ -52,9 +52,9 @@ object HmrcBuild extends Build {
 object Dependencies {
 
   object Compile {
-    val playJson = "com.typesafe.play" %% "play-json" % "2.5.8" % "provided"
+    val playJson = "com.typesafe.play" %% "play-json" % "2.5.12" % "provided"
     val secure = "uk.gov.hmrc" %% "secure" % "7.1.0"
-    val crypto = "uk.gov.hmrc" %% "crypto" % "4.1.0"
+    val crypto = "uk.gov.hmrc" %% "crypto" % "4.2.0"
   }
 
   sealed abstract class Test(scope: String) {
