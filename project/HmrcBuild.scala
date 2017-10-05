@@ -38,9 +38,7 @@ object HmrcBuild extends Build {
   lazy val jsonEncryption = Project(nameApp, file("."))
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
-      scalaVersion := "2.11.11",
       libraryDependencies ++= appDependencies,
-      crossScalaVersions := Seq("2.11.11"),
       organization := "uk.gov.hmrc",
       resolvers := Seq(
         Resolver.bintrayRepo("hmrc", "releases"),
