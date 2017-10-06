@@ -38,9 +38,7 @@ object HmrcBuild extends Build {
   lazy val jsonEncryption = Project(nameApp, file("."))
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
-      scalaVersion := "2.11.7",
       libraryDependencies ++= appDependencies,
-      crossScalaVersions := Seq("2.11.7"),
       organization := "uk.gov.hmrc",
       resolvers := Seq(
         Resolver.bintrayRepo("hmrc", "releases"),
@@ -52,9 +50,9 @@ object HmrcBuild extends Build {
 object Dependencies {
 
   object Compile {
-    val playJson = "com.typesafe.play" %% "play-json" % "2.5.12" % "provided"
-    val secure = "uk.gov.hmrc" %% "secure" % "7.1.0"
-    val crypto = "uk.gov.hmrc" %% "crypto" % "4.2.0"
+    val playJson = "com.typesafe.play" %% "play-json" % "2.6.5" % "provided"
+    val secure = "uk.gov.hmrc" %% "secure" % "7.2.0"
+    val crypto = "uk.gov.hmrc" %% "crypto" % "4.4.0"
   }
 
   sealed abstract class Test(scope: String) {
