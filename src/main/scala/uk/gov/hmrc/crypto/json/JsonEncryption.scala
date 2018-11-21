@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package uk.gov.hmrc.crypto.json
 
 import play.api.libs.json._
-import uk.gov.hmrc.crypto.{Crypted, PlainText, CompositeSymmetricCrypto, Protected}
+import uk.gov.hmrc.crypto.{CompositeSymmetricCrypto, Crypted, PlainText, Protected}
 
 class JsonEncryptor[T]()(implicit crypto: CompositeSymmetricCrypto, wrts: Writes[T]) extends Writes[Protected[T]] {
   override def writes(o: Protected[T]): JsValue = storeInJson(o)
@@ -37,7 +37,7 @@ class JsonDecryptor[T](implicit crypto: CompositeSymmetricCrypto, rds: Reads[T])
 
   private def readFromJson(encrypted: Crypted): Protected[T] = {
     val plainText = crypto.decrypt(encrypted)
-    val obj = Json.parse(plainText.value).as[T]
+    val obj       = Json.parse(plainText.value).as[T]
     Protected(obj)
   }
 

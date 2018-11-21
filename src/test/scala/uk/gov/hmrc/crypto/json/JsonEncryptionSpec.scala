@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,8 @@
 package uk.gov.hmrc.crypto.json
 
 import org.scalatest.{Matchers, WordSpec}
-import play.api.libs.json.{Writes, JsString, Json}
+import play.api.libs.json.{JsString, Json, Writes}
 import uk.gov.hmrc.crypto._
-
 
 class JsonEncryptionSpec extends WordSpec with Matchers {
 
@@ -27,15 +26,18 @@ class JsonEncryptionSpec extends WordSpec with Matchers {
 
     "encrypt the elements" in {
 
-      val e = TestEntity("unencrypted", Protected[String]("encrypted"),
-        Protected[Boolean](true), Protected[BigDecimal](BigDecimal("234")))
+      val e = TestEntity(
+        "unencrypted",
+        Protected[String]("encrypted"),
+        Protected[Boolean](true),
+        Protected[BigDecimal](BigDecimal("234")))
 
       val json = Json.toJson(e)(TestEntity.formats)
 
-      (json \ "normalString").get shouldBe JsString("unencrypted")
-      (json \ "encryptedString").get shouldBe JsString("3TW3L1raxsKBYuKvtKqPEQ==")
+      (json \ "normalString").get     shouldBe JsString("unencrypted")
+      (json \ "encryptedString").get  shouldBe JsString("3TW3L1raxsKBYuKvtKqPEQ==")
       (json \ "encryptedBoolean").get shouldBe JsString("YhWm43Ad3rW5Votdy855Kg==")
-      (json \ "encryptedNumber").get shouldBe JsString("Z/ipDOvm7C3ck/TBkiteAg==")
+      (json \ "encryptedNumber").get  shouldBe JsString("Z/ipDOvm7C3ck/TBkiteAg==")
 
     }
 
@@ -50,7 +52,11 @@ class JsonEncryptionSpec extends WordSpec with Matchers {
 
       val entity = Json.fromJson(Json.parse(jsonString))(TestEntity.formats).get
 
-      entity shouldBe TestEntity("unencrypted", Protected[String]("encrypted"), Protected[Boolean](true), Protected[BigDecimal](BigDecimal("234")))
+      entity shouldBe TestEntity(
+        "unencrypted",
+        Protected[String]("encrypted"),
+        Protected[Boolean](true),
+        Protected[BigDecimal](BigDecimal("234")))
 
     }
 
@@ -59,15 +65,16 @@ class JsonEncryptionSpec extends WordSpec with Matchers {
   "json encryption" should {
 
     "encrypt/decrypt a given Protected entitiy" in {
-      val form = TestForm("abdu", "sahin", 100, false)
-      val protectd = Protected[TestForm](form)
-      val encryptor = new JsonEncryptor()(Crypto, TestForm.formats)
+      val form           = TestForm("abdu", "sahin", 100, false)
+      val protectd       = Protected[TestForm](form)
+      val encryptor      = new JsonEncryptor()(Crypto, TestForm.formats)
       val encryptedValue = encryptor.writes(protectd)
-      val decryptor = new JsonDecryptor()(Crypto, TestForm.formats)
-      val decrypted = decryptor.reads(encryptedValue)
+      val decryptor      = new JsonDecryptor()(Crypto, TestForm.formats)
+      val decrypted      = decryptor.reads(encryptedValue)
 
       decrypted.asOpt should be(Some(protectd))
-      encryptedValue should be(JsString("TeYgL3TgD8e0XnvjhQlZDl0E9imdEjgyHHHSizAcKuUBZwh2ITwo34Ud8XNE88QKzfGOgAOpbMMKwcx+gwaGaA=="))
+      encryptedValue should be(
+        JsString("TeYgL3TgD8e0XnvjhQlZDl0E9imdEjgyHHHSizAcKuUBZwh2ITwo34Ud8XNE88QKzfGOgAOpbMMKwcx+gwaGaA=="))
     }
 
   }
@@ -81,8 +88,11 @@ object Crypto extends CompositeSymmetricCrypto {
   override protected val previousCryptos: Seq[Decrypter] = Seq.empty
 }
 
-case class TestEntity(normalString: String, encryptedString: Protected[String],
-                      encryptedBoolean: Protected[Boolean], encryptedNumber: Protected[BigDecimal])
+case class TestEntity(
+  normalString: String,
+  encryptedString: Protected[String],
+  encryptedBoolean: Protected[Boolean],
+  encryptedNumber: Protected[BigDecimal])
 
 object TestEntity {
 
@@ -97,12 +107,12 @@ object TestEntity {
   object JsonBigDecimalDecryption extends JsonDecryptor[BigDecimal]
 
   implicit val formats = {
-    implicit val encryptedStringFormats= JsonStringEncryption
-    implicit val encryptedBooleanFormats = JsonBooleanEncryption
+    implicit val encryptedStringFormats     = JsonStringEncryption
+    implicit val encryptedBooleanFormats    = JsonBooleanEncryption
     implicit val encryptedBigDecimalFormats = JsonBigDecimalEncryption
 
-    implicit val decryptedStringFormats = JsonStringDecryption
-    implicit val decryptedBooleanFormats = JsonBooleanDecryption
+    implicit val decryptedStringFormats     = JsonStringDecryption
+    implicit val decryptedBooleanFormats    = JsonBooleanDecryption
     implicit val decryptedBigDecimalFormats = JsonBigDecimalDecryption
 
     Json.format[TestEntity]
