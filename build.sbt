@@ -4,24 +4,21 @@ import uk.gov.hmrc.versioning.SbtGitVersioning
 
 val appName = "json-encryption"
 
-val play25 = "2.5.19"
-val play26 = "2.6.14"
-val play27 = "2.7.4"
 
   val compileDependencies = PlayCrossCompilation.dependencies(
     shared = Seq(
       "uk.gov.hmrc"       %% "crypto"    % "5.6.0"
     ),
     play25 = Seq(
-      "com.typesafe.play" %% "play-json"        % play25,
+      "com.typesafe.play" %% "play-json"        % "2.5.19",
       "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-25"
     ),
     play26 = Seq(
-      "com.typesafe.play" %% "play-json"        % play26,
+      "com.typesafe.play" %% "play-json"        % "2.6.14",
       "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-26"
     ),
     play27 = Seq(
-      "com.typesafe.play" %% "play-json"        % play27,
+      "com.typesafe.play" %% "play-json"        % "2.7.4",
       "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-27"
     )
   )
