@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package uk.gov.hmrc.crypto.json
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatest.matchers.should.Matchers
 import play.api.libs.json.{JsString, Json}
 import uk.gov.hmrc.crypto._
 
-class JsonEncryptionSpec extends WordSpec with Matchers {
+class JsonEncryptionSpec extends AnyWordSpecLike with Matchers {
 
   "formatting an entity" should {
 
@@ -65,12 +66,12 @@ class JsonEncryptionSpec extends WordSpec with Matchers {
   "json encryption" should {
 
     "encrypt/decrypt a given Protected entitiy" in {
-      val form           = TestForm("abdu", "sahin", 100, false)
-      val protectd       = Protected[TestForm](form)
-      val encryptor      = new JsonEncryptor()(Crypto, TestForm.formats)
-      val encryptedValue = encryptor.writes(protectd)
-      val decryptor      = new JsonDecryptor()(Crypto, TestForm.formats)
-      val decrypted      = decryptor.reads(encryptedValue)
+      val form                              = TestForm("abdu", "sahin", 100, false)
+      val protectd                          = Protected[TestForm](form)
+      val encryptor:JsonEncryptor[TestForm] = new JsonEncryptor()(Crypto, TestForm.formats)
+      val encryptedValue                    = encryptor.writes(protectd)
+      val decryptor                         = new JsonDecryptor()(Crypto, TestForm.formats)
+      val decrypted                         = decryptor.reads(encryptedValue)
 
       decrypted.asOpt should be(Some(protectd))
       encryptedValue should be(

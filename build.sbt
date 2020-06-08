@@ -5,26 +5,31 @@ import uk.gov.hmrc.versioning.SbtGitVersioning
 val appName = "json-encryption"
 
 val play25 = "2.5.19"
-val play26 = "2.6.20"
+val play26 = "2.6.14"
+val play27 = "2.7.4"
 
   val compileDependencies = PlayCrossCompilation.dependencies(
     shared = Seq(
-      "uk.gov.hmrc"       %% "crypto"    % "5.4.0"
+      "uk.gov.hmrc"       %% "crypto"    % "5.6.0"
     ),
     play25 = Seq(
-      "com.typesafe.play" %% "play-json"        % "2.5.19",
-      "uk.gov.hmrc"       %% "http-verbs"       % "9.7.0-play-25"
+      "com.typesafe.play" %% "play-json"        % play25,
+      "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-25"
     ),
     play26 = Seq(
-      "com.typesafe.play" %% "play-json"        % "2.6.13",
-      "uk.gov.hmrc"       %% "http-verbs"       % "9.7.0-play-26"
+      "com.typesafe.play" %% "play-json"        % play26,
+      "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-26"
+    ),
+    play27 = Seq(
+      "com.typesafe.play" %% "play-json"        % play27,
+      "uk.gov.hmrc"       %% "http-verbs"       % "10.7.0-play-27"
     )
   )
 
   val testDependencies = PlayCrossCompilation.dependencies(
     shared = Seq(
-      "org.scalatest" %% "scalatest"  % "3.0.5" % "test",
-      "org.pegdown"   % "pegdown"     % "1.6.0" % "test"
+      "org.scalatest"          %% "scalatest"    % "3.1.2"   % "test",
+      "com.vladsch.flexmark"   %  "flexmark-all" % "0.35.10" % "test"
     )
   )
 
