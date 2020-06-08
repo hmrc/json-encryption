@@ -3,25 +3,24 @@ sudo: false
 language: scala
 cache:
   directories:
-    - $HOME/.ivy2/cache
-    - $HOME/.sbt/boot/
+    - $HOME/.sbt
+    - $HOME/.ivy2
+    - $HOME/.m2
 
 jdk:
 - openjdk8
 
 matrix:
   include:
-  - scala: 2.11.12
-    env: PLAY_VERSION=2.5
-  - scala: 2.11.12
-    env: PLAY_VERSION=2.6
-  - scala: 2.12.8
-    env: PLAY_VERSION=2.6
-
-
-script:
-  - sbt ++$TRAVIS_SCALA_VERSION -J-XX:ReservedCodeCacheSize=256M test
-
-  # Tricks to avoid unnecessary cache updates
-  - find $HOME/.sbt -name "*.lock" | xargs rm
-  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+    - scala: 2.11.12
+      env: PLAY_VERSION=2.5
+      jdk: openjdk8
+    - scala: 2.11.12
+      env: PLAY_VERSION=2.6
+      jdk: openjdk8
+    - scala: 2.12.8
+      env: PLAY_VERSION=2.6
+      jdk: openjdk8
+    - scala: 2.12.8
+      env: PLAY_VERSION=2.7
+      jdk: openjdk8
