@@ -39,7 +39,7 @@ lazy val library = Project(appName, file("."))
       Resolver.typesafeRepo("releases")
     ),
     majorVersion := 4,
-    scalaVersion := "2.11.12",
+    scalaVersion := "2.12.8",
     crossScalaVersions := Seq("2.11.12", "2.12.8"),
     makePublicallyAvailableOnBintray := true
   )
