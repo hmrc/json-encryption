@@ -6,16 +6,13 @@ val compileDependencies = PlayCrossCompilation.dependencies(
     "uk.gov.hmrc"       %% "crypto"             % "6.0.0"
   ),
   play26 = Seq(
-    "com.typesafe.play" %% "play-json"          % "2.6.14",
-    "uk.gov.hmrc"       %% "http-verbs-play-26" % "13.2.0"
+    "com.typesafe.play" %% "play-json"          % "2.6.14"
   ),
   play27 = Seq(
-    "com.typesafe.play" %% "play-json"          % "2.7.4",
-    "uk.gov.hmrc"       %% "http-verbs-play-27" % "13.2.0"
+    "com.typesafe.play" %% "play-json"          % "2.7.4"
   ),
   play28 = Seq(
-    "com.typesafe.play" %% "play-json"          % "2.8.1",
-    "uk.gov.hmrc"       %% "http-verbs-play-28" % "13.2.0"
+    "com.typesafe.play" %% "play-json"          % "2.8.1"
   )
 )
 
