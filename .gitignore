@@ -9,3 +9,4 @@ lib_managed
 *.DS_Store
 .metals/
 .vscode/
+.bsp
