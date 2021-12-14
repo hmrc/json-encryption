@@ -3,7 +3,7 @@ import sbt._
 
 val compileDependencies = PlayCrossCompilation.dependencies(
   shared = Seq(
-    "uk.gov.hmrc"       %% "crypto"             % "6.0.0"
+    "uk.gov.hmrc"       %% "crypto"             % "6.1.0"
   ),
   play26 = Seq(
     "com.typesafe.play" %% "play-json"          % "2.6.14"
@@ -23,13 +23,16 @@ val testDependencies = PlayCrossCompilation.dependencies(
   )
 )
 
+val scala2_12 = "2.12.15"
+val scala2_13 = "2.13.7"
+
 lazy val library = Project("json-encryption", file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
   .settings(
-    libraryDependencies ++= compileDependencies ++ testDependencies,
+    scalaVersion := scala2_12,
+    crossScalaVersions := Seq(scala2_12, scala2_13),
     majorVersion := 4,
-    scalaVersion := "2.12.13",
-    makePublicallyAvailableOnBintray := true
+    isPublicArtefact := true,
+    libraryDependencies ++= compileDependencies ++ testDependencies
   )
   .settings(PlayCrossCompilation.playCrossCompilationSettings)
   .disablePlugins(sbt.plugins.JUnitXmlReportPlugin)
