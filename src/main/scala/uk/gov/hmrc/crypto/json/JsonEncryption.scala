@@ -17,19 +17,18 @@
 package uk.gov.hmrc.crypto.json
 
 import play.api.libs.json._
-import uk.gov.hmrc.crypto.{CompositeSymmetricCrypto, Crypted, PlainText, Protected}
+import uk.gov.hmrc.crypto.{Crypted, Decrypter, Encrypter, PlainText, Protected}
 
-class JsonEncryptor[T]()(implicit crypto: CompositeSymmetricCrypto, wrts: Writes[T]) extends Writes[Protected[T]] {
+class JsonEncryptor[T]()(implicit crypto: Encrypter with Decrypter, wrts: Writes[T]) extends Writes[Protected[T]] {
   override def writes(o: Protected[T]): JsValue = storeInJson(o)
 
   private def storeInJson(protectd: Protected[T]): JsValue = {
     val pt = PlainText(wrts.writes(protectd.decryptedValue).toString())
     JsString(crypto.encrypt(pt).value)
   }
-
 }
 
-class JsonDecryptor[T](implicit crypto: CompositeSymmetricCrypto, rds: Reads[T]) extends Reads[Protected[T]] {
+class JsonDecryptor[T](implicit crypto: Encrypter with Decrypter, rds: Reads[T]) extends Reads[Protected[T]] {
   override def reads(json: JsValue): JsResult[Protected[T]] = {
     val crypted = Crypted(json.as[String])
     JsSuccess(readFromJson(crypted))
@@ -40,5 +39,4 @@ class JsonDecryptor[T](implicit crypto: CompositeSymmetricCrypto, rds: Reads[T])
     val obj       = Json.parse(plainText.value).as[T]
     Protected(obj)
   }
-
 }
