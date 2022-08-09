@@ -4,6 +4,8 @@
 
 A library that provides JSON encryption.
 
+Instead of `Protected`, you may prefer to use `Sensitive` from [crypto](https://github.com/hmrc/crypto#sensitive) and the play formats from [crypto-json](https://github.com/hmrc/crypto#crypto-json). This is especially recommended where erasure is a problem (e.g. mongo codecs).
+
 ## Setup
 
 Add the jar to the project dependencies:
