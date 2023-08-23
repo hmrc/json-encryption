@@ -1,3 +1,7 @@
+[DEPRECATED]
+=
+*Use [crypto-json](https://github.com/hmrc/crypto#crypto-json instead*
+
 # Json-encryption
 
 ![](https://img.shields.io/github/v/release/hmrc/json-encryption)
